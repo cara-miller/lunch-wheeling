@@ -5,14 +5,27 @@ class RandomLunchContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({ wasButtonClicked: true });
   }
 
   render() {
-    const message = 'what the heck';
+    const wasButtonClicked = this.state.wasButtonClicked;
+    let message = '';
+
+    if (wasButtonClicked) {
+      message = 'Something Stupid';
+    }
     return (
       <div>
-        <button> Here is the button </button>
-        <RestaurantComponent message={message} />
+        <RestaurantComponent
+          messageMaterializer={this.handleClick}
+          message={message}
+          wasButtonClicked={wasButtonClicked}
+        />
       </div>
     );
   }
